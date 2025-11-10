@@ -21,7 +21,7 @@ function RootNavgiator() {
         <Stack.Screen name="(tabs)" />
       </Stack.Protected>
 
-      <Stack.Screen name="login" />
+      <Stack.Screen name="(auth)/login" />
     </Stack>
   );
 }
