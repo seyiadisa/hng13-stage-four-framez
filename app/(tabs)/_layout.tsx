@@ -1,10 +1,30 @@
+import { useTheme } from "@/providers/theme-provider";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { View } from "react-native";
+
 export default function TabLayout() {
+  const { theme } = useTheme();
+
   return (
     <Tabs
       initialRouteName="index"
-      screenOptions={{ tabBarShowLabel: false, headerShown: false }}
+      screenOptions={{
+        tabBarShowLabel: false,
+        headerShown: false,
+        tabBarInactiveTintColor: theme.borderColor,
+        tabBarActiveTintColor: theme.textColor,
+        tabBarBackground: () => (
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: theme.tabBgColor,
+              borderTopColor: theme.borderColor,
+              borderTopWidth: 1,
+            }}
+          />
+        ),
+      }}
     >
       <Tabs.Screen
         name="index"
