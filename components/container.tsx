@@ -1,5 +1,10 @@
 import { useTheme } from "@/providers/theme-provider";
-import { StyleSheet, View } from "react-native";
+import {
+  GestureResponderEvent,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 
 export function PageContainer({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
@@ -16,4 +21,29 @@ export function PageContainer({ children }: { children: React.ReactNode }) {
   });
 
   return <View style={styles.container}>{children}</View>;
+}
+
+export function OutlineButton({
+  children,
+  onPress,
+}: {
+  children: React.ReactNode;
+  onPress?: (e: GestureResponderEvent) => void;
+}) {
+  const { theme } = useTheme();
+
+  return (
+    <Pressable
+      style={{
+        borderWidth: 1,
+        borderColor: theme.textColor,
+        borderRadius: 32,
+        paddingInline: 24,
+        paddingBlock: 12,
+      }}
+      onPress={onPress}
+    >
+      {children}
+    </Pressable>
+  );
 }
