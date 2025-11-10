@@ -1,5 +1,6 @@
 import { useTheme } from "@/providers/theme-provider";
 import { FontAwesome6 } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
 import { View } from "react-native";
 
@@ -14,6 +15,10 @@ export default function TabLayout() {
         headerShown: false,
         tabBarInactiveTintColor: theme.borderColor,
         tabBarActiveTintColor: theme.textColor,
+        tabBarStyle: {
+          height: 100,
+          paddingTop: 20,
+        },
         tabBarBackground: () => (
           <View
             style={{
@@ -30,7 +35,7 @@ export default function TabLayout() {
         name="index"
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="house" color={color} size={18} />
+            <FontAwesome6 name="house" color={color} size={22} />
           ),
         }}
       />
@@ -38,15 +43,26 @@ export default function TabLayout() {
         name="search"
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="magnifying-glass" color={color} size={18} />
+            <FontAwesome6 name="magnifying-glass" color={color} size={22} />
           ),
         }}
       />
       <Tabs.Screen
         name="new"
         options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="plus" color={color} size={18} />
+          tabBarIcon: () => (
+            <LinearGradient
+              colors={["#F62E8E", "#AC1AF0"]}
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: 24,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FontAwesome6 name="plus" color={"#FFFFFF"} size={22} />
+            </LinearGradient>
           ),
         }}
       />
@@ -54,7 +70,7 @@ export default function TabLayout() {
         name="notifications"
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="bell" color={color} size={18} />
+            <FontAwesome6 name="bell" color={color} size={22} />
           ),
         }}
       />
@@ -62,7 +78,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="user" color={color} size={18} />
+            <FontAwesome6 name="user" color={color} size={22} />
           ),
         }}
       />
