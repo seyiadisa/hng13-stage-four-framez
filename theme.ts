@@ -6,6 +6,7 @@ export type ThemeColors = {
   borderColor: string;
   primary: string;
   accent: string;
+  errorColor: string;
 };
 
 export const lightTheme: ThemeColors = {
@@ -16,6 +17,7 @@ export const lightTheme: ThemeColors = {
   borderColor: "#323436",
   primary: "#F62E8E",
   accent: "#2E8AF6",
+  errorColor: "#dc2626",
 };
 
 export const darkTheme: ThemeColors = {
@@ -26,6 +28,7 @@ export const darkTheme: ThemeColors = {
   borderColor: "#323436",
   primary: "#F62E8E",
   accent: "#2E8AF6",
+  errorColor: "#ef4444",
 };
 
 export const SPACING = {

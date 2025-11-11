@@ -1,9 +1,10 @@
 import { useTheme } from "@/providers/theme-provider";
+import { TYPOGRAPHY } from "@/theme";
 import {
   GestureResponderEvent,
-  Pressable,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { BodyText, SecondaryText } from "./typography";
@@ -35,7 +36,7 @@ export function PrimaryButton({
   const { theme } = useTheme();
 
   return (
-    <Pressable
+    <TouchableOpacity
       style={{
         backgroundColor: theme.primary,
         borderRadius: 32,
@@ -45,7 +46,7 @@ export function PrimaryButton({
       onPress={onPress}
     >
       <SecondaryText>{children}</SecondaryText>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
@@ -59,7 +60,7 @@ export function OutlineButton({
   const { theme } = useTheme();
 
   return (
-    <Pressable
+    <TouchableOpacity
       style={{
         borderWidth: 1,
         borderColor: theme.textColor,
@@ -70,31 +71,34 @@ export function OutlineButton({
       onPress={onPress}
     >
       <BodyText>{children}</BodyText>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
 export function GhostButton({
   children,
   variant = "primary",
+  small = false,
   onPress,
 }: {
   children: React.ReactNode;
   variant: "primary" | "accent";
+  small?: boolean;
   onPress?: (e: GestureResponderEvent) => void;
 }) {
   const { theme } = useTheme();
 
   return (
-    <Pressable onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <Text
         style={{
           fontWeight: 700,
           color: variant === "primary" ? theme.primary : theme.accent,
+          fontSize: small ? TYPOGRAPHY.sizes.tertiary : TYPOGRAPHY.sizes.body,
         }}
       >
         {children}
       </Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 }

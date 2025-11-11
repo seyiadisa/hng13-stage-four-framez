@@ -2,6 +2,21 @@ import { useTheme } from "@/providers/theme-provider";
 import { TYPOGRAPHY } from "@/theme";
 import { Text } from "react-native";
 
+export const BrandText = ({ children }: { children: React.ReactNode }) => {
+  const { theme } = useTheme();
+
+  return (
+    <Text
+      style={{
+        fontFamily: "Allura",
+        fontSize: 40,
+        color: theme.textColor,
+      }}
+    >
+      {children}
+    </Text>
+  );
+};
 export const TitleText = ({
   children,
   bold = false,
@@ -14,6 +29,7 @@ export const TitleText = ({
   return (
     <Text
       style={{
+        fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.title,
         color: theme.textColor,
         fontWeight: bold ? 700 : 400,
@@ -29,7 +45,11 @@ export const TitleMutedText = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Text
-      style={{ fontSize: TYPOGRAPHY.sizes.title, color: theme.textMutedColor }}
+      style={{
+        fontFamily: "HKGrotesk",
+        fontSize: TYPOGRAPHY.sizes.title,
+        color: theme.textMutedColor,
+      }}
     >
       {children}
     </Text>
@@ -48,6 +68,7 @@ export const BodyText = ({
   return (
     <Text
       style={{
+        fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.body,
         color: theme.textColor,
         fontWeight: bold ? 700 : 400,
@@ -63,7 +84,11 @@ export const BodyMutedText = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Text
-      style={{ fontSize: TYPOGRAPHY.sizes.body, color: theme.textMutedColor }}
+      style={{
+        fontFamily: "HKGrotesk",
+        fontSize: TYPOGRAPHY.sizes.body,
+        color: theme.textMutedColor,
+      }}
     >
       {children}
     </Text>
@@ -75,7 +100,11 @@ export const SecondaryText = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Text
-      style={{ fontSize: TYPOGRAPHY.sizes.secondary, color: theme.textColor }}
+      style={{
+        fontFamily: "HKGrotesk",
+        fontSize: TYPOGRAPHY.sizes.secondary,
+        color: theme.textColor,
+      }}
     >
       {children}
     </Text>
@@ -92,6 +121,7 @@ export const SecondaryMutedText = ({
   return (
     <Text
       style={{
+        fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.secondary,
         color: theme.textMutedColor,
       }}
@@ -106,7 +136,11 @@ export const TertiaryText = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Text
-      style={{ fontSize: TYPOGRAPHY.sizes.tertiary, color: theme.textColor }}
+      style={{
+        fontFamily: "HKGrotesk",
+        fontSize: TYPOGRAPHY.sizes.tertiary,
+        color: theme.textColor,
+      }}
     >
       {children}
     </Text>
@@ -123,8 +157,25 @@ export const TertiaryMutedText = ({
   return (
     <Text
       style={{
+        fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.tertiary,
         color: theme.textMutedColor,
+      }}
+    >
+      {children}
+    </Text>
+  );
+};
+
+export const ErrorText = ({ children }: { children: React.ReactNode }) => {
+  const { theme } = useTheme();
+
+  return (
+    <Text
+      style={{
+        fontFamily: "HKGrotesk",
+        fontSize: TYPOGRAPHY.sizes.tertiary,
+        color: theme.errorColor,
       }}
     >
       {children}
