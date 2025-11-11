@@ -2,11 +2,23 @@ import { useTheme } from "@/providers/theme-provider";
 import { TYPOGRAPHY } from "@/theme";
 import { Text } from "react-native";
 
-export const TitleText = ({ children }: { children: React.ReactNode }) => {
+export const TitleText = ({
+  children,
+  bold = false,
+}: {
+  children: React.ReactNode;
+  bold?: boolean;
+}) => {
   const { theme } = useTheme();
 
   return (
-    <Text style={{ fontSize: TYPOGRAPHY.sizes.title, color: theme.textColor }}>
+    <Text
+      style={{
+        fontSize: TYPOGRAPHY.sizes.title,
+        color: theme.textColor,
+        fontWeight: bold ? 700 : 400,
+      }}
+    >
       {children}
     </Text>
   );
@@ -24,11 +36,23 @@ export const TitleMutedText = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const BodyText = ({ children }: { children: React.ReactNode }) => {
+export const BodyText = ({
+  children,
+  bold = false,
+}: {
+  children: React.ReactNode;
+  bold?: boolean;
+}) => {
   const { theme } = useTheme();
 
   return (
-    <Text style={{ fontSize: TYPOGRAPHY.sizes.body, color: theme.textColor }}>
+    <Text
+      style={{
+        fontSize: TYPOGRAPHY.sizes.body,
+        color: theme.textColor,
+        fontWeight: bold ? 700 : 400,
+      }}
+    >
       {children}
     </Text>
   );

@@ -1,19 +1,25 @@
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { GhostButton, PageContainer } from "@/components/container";
+import { BodyText, TitleText } from "@/components/typography";
+import { View } from "react-native";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Notifications</Text>
-      <Text>
-        Go to <Link href={"/(auth)/login"}>login</Link>
-      </Text>
-    </View>
+    <PageContainer>
+      <View
+        style={{
+          flexDirection: "row",
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <TitleText bold>Alerts</TitleText>
+        <GhostButton variant="primary">Mark all as read</GhostButton>
+      </View>
+
+      <View>
+        <BodyText>TODO: Notifications</BodyText>
+      </View>
+    </PageContainer>
   );
 }

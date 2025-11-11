@@ -17,7 +17,6 @@ export default function Index() {
           alignItems: "center",
           gap: 6,
           marginBottom: 24,
-          marginTop: 12,
         }}
       >
         <LinearGradient
@@ -65,9 +64,7 @@ export default function Index() {
           <BodyMutedText>Following</BodyMutedText>
         </View>
         <View>
-          <OutlineButton>
-            <BodyText>Edit Profile</BodyText>
-          </OutlineButton>
+          <OutlineButton>Edit Profile</OutlineButton>
         </View>
       </View>
       <BodyText>TODO: Posts</BodyText>
