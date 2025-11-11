@@ -7,7 +7,8 @@ import {
 } from "@/components/typography";
 import { useAuth } from "@/providers/auth-provider";
 import { useTheme } from "@/providers/theme-provider";
-import { loginSchema } from "@/schemas";
+import { signupSchema } from "@/schemas";
+import { TYPOGRAPHY } from "@/theme";
 import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
@@ -16,33 +17,59 @@ import {
   Keyboard,
   Pressable,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 
-export default function Login() {
+export default function Signup() {
   const router = useRouter();
-  const { signIn } = useAuth();
+  const { signUp } = useAuth();
   const { theme } = useTheme();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ email: "", password: "" });
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({
+    email: "",
+    name: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
 
   const validate = () => {
-    const newErrors = { email: "", password: "" };
+    const newErrors = {
+      email: "",
+      name: "",
+      password: "",
+      confirmPassword: "",
+    };
     let isValid = true;
 
-    const result = loginSchema.safeParse({ email, password });
+    const result = signupSchema.safeParse({
+      email,
+      name,
+      password,
+      confirmPassword,
+    });
 
     if (!result.success) {
       for (const issue of result.error.issues) {
         if (issue.path[0] === "email") {
           newErrors.email = issue.message;
         }
+        if (issue.path[0] === "name") {
+          newErrors.name = issue.message;
+        }
         if (issue.path[0] === "password") {
           newErrors.password = issue.message;
+        }
+        if (issue.path[0] === "confirmPassword") {
+          newErrors.confirmPassword = issue.message;
         }
       }
       setErrors(newErrors);
@@ -53,9 +80,9 @@ export default function Login() {
     return isValid;
   };
 
-  const handleLogin = () => {
+  const handleSignup = () => {
     if (validate()) {
-      signIn();
+      signUp();
     }
   };
 
@@ -95,6 +122,24 @@ export default function Login() {
           }}
         >
           <BrandText>Framez</BrandText>
+          <View
+            style={{
+              marginTop: 24,
+              width: "100%",
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                textAlign: "center",
+                color: theme.textColor,
+                fontSize: TYPOGRAPHY.sizes.body,
+                opacity: 0.7,
+              }}
+            >
+              Sign up to see photos and videos from your friends
+            </Text>
+          </View>
           <View style={{ height: 60 }} />
 
           <View style={styles.inputContainer}>
@@ -111,6 +156,22 @@ export default function Login() {
           {errors.email && (
             <View style={styles.errorText}>
               <ErrorText>{errors.email}</ErrorText>
+            </View>
+          )}
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Full name"
+              placeholderTextColor={theme.textMutedColor}
+              value={name}
+              onChangeText={setName}
+              autoCapitalize="words"
+            />
+          </View>
+          {errors.name && (
+            <View style={styles.errorText}>
+              <ErrorText>{errors.name}</ErrorText>
             </View>
           )}
 
@@ -139,15 +200,41 @@ export default function Login() {
             </View>
           )}
 
-          <View style={{ alignSelf: "flex-end", marginBottom: 24 }}>
-            <GhostButton variant="accent" small>
-              Forgot Password?
-            </GhostButton>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Confirm Password"
+              placeholderTextColor={theme.textMutedColor}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              secureTextEntry={!isConfirmPasswordVisible}
+            />
+            <TouchableOpacity
+              onPress={() =>
+                setIsConfirmPasswordVisible(!isConfirmPasswordVisible)
+              }
+            >
+              <Feather
+                name={isConfirmPasswordVisible ? "eye-off" : "eye"}
+                size={20}
+                color={theme.textMutedColor}
+              />
+            </TouchableOpacity>
           </View>
+          {errors.confirmPassword && (
+            <View style={styles.errorText}>
+              <ErrorText>{errors.confirmPassword}</ErrorText>
+            </View>
+          )}
 
           <TouchableOpacity
-            onPress={handleLogin}
-            style={{ width: "100%", borderRadius: 32, overflow: "hidden" }}
+            onPress={handleSignup}
+            style={{
+              width: "100%",
+              borderRadius: 32,
+              overflow: "hidden",
+              marginTop: 24,
+            }}
           >
             <LinearGradient
               colors={["#F62E8E", "#AC1AF0"]}
@@ -155,7 +242,7 @@ export default function Login() {
               end={{ x: 1, y: 1 }}
               style={{ padding: 16, alignItems: "center" }}
             >
-              <BodyText bold>Login</BodyText>
+              <BodyText bold>Create an account</BodyText>
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -167,13 +254,13 @@ export default function Login() {
             paddingBottom: 24,
           }}
         >
-          <TertiaryText>Don&apos;t have an account? </TertiaryText>
+          <TertiaryText>Already have an account? </TertiaryText>
           <GhostButton
-            onPress={() => router.replace("/signup")}
+            onPress={() => router.replace("/login")}
             variant="accent"
             small
           >
-            Sign up
+            Log in
           </GhostButton>
         </View>
       </PageContainer>

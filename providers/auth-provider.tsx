@@ -9,6 +9,8 @@ type AuthType = {
   user: User | null;
   isLoggedIn: boolean;
   signIn: () => void;
+  signUp: () => void;
+  signOut: () => void;
   setUser: (user: User) => void;
 };
 
@@ -26,7 +28,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
   const signIn = () => {
@@ -35,8 +37,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     router.replace("/");
   };
 
+  const signUp = () => {
+    setUser({ name: "John Doe" });
+    setIsLoggedIn(true);
+    router.replace("/");
+  };
+
+  const signOut = () => {
+    setUser(null);
+    setIsLoggedIn(false);
+    router.replace("/(auth)/login");
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, user, signIn, setUser }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, user, signIn, signUp, signOut, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
