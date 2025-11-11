@@ -8,7 +8,8 @@ import {
 import { useAuth } from "@/providers/auth-provider";
 import { useTheme } from "@/providers/theme-provider";
 import { signupSchema } from "@/schemas";
-import { TYPOGRAPHY } from "@/theme";
+import { authStyles } from "@/styles";
+import { TYPOGRAPHY } from "@/styles/theme";
 import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
@@ -16,7 +17,6 @@ import { useState } from "react";
 import {
   Keyboard,
   Pressable,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -24,9 +24,11 @@ import {
 } from "react-native";
 
 export default function Signup() {
-  const router = useRouter();
   const { signUp } = useAuth();
   const { theme } = useTheme();
+  const router = useRouter();
+  const styles = authStyles(theme);
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -85,30 +87,6 @@ export default function Signup() {
       signUp();
     }
   };
-
-  const styles = StyleSheet.create({
-    inputContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      backgroundColor: theme.borderColor,
-      borderRadius: 12,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      marginBottom: 16,
-      width: "100%",
-    },
-    input: {
-      flex: 1,
-      color: theme.textColor,
-      fontFamily: "HKGrotesk",
-    },
-    errorText: {
-      alignSelf: "flex-start",
-      marginBottom: 16,
-      marginLeft: 5,
-      marginTop: -8,
-    },
-  });
 
   return (
     <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
@@ -245,23 +223,24 @@ export default function Signup() {
               <BodyText bold>Create an account</BodyText>
             </LinearGradient>
           </TouchableOpacity>
-        </View>
 
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            paddingBottom: 24,
-          }}
-        >
-          <TertiaryText>Already have an account? </TertiaryText>
-          <GhostButton
-            onPress={() => router.replace("/login")}
-            variant="accent"
-            small
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              paddingBottom: 24,
+              marginTop: 36,
+            }}
           >
-            Log in
-          </GhostButton>
+            <TertiaryText>Already have an account? </TertiaryText>
+            <GhostButton
+              onPress={() => router.replace("/login")}
+              variant="accent"
+              small
+            >
+              Log in
+            </GhostButton>
+          </View>
         </View>
       </PageContainer>
     </Pressable>

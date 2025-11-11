@@ -1,5 +1,5 @@
 import { useTheme } from "@/providers/theme-provider";
-import { TYPOGRAPHY } from "@/theme";
+import { TYPOGRAPHY } from "@/styles/theme";
 import { Text } from "react-native";
 
 export const BrandText = ({ children }: { children: React.ReactNode }) => {

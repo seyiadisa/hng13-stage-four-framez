@@ -1,4 +1,4 @@
-import { darkTheme, lightTheme, ThemeColors } from "@/theme";
+import { darkTheme, lightTheme, ThemeColors } from "@/styles/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Appearance } from "react-native";

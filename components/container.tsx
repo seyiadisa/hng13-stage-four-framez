@@ -1,5 +1,5 @@
 import { useTheme } from "@/providers/theme-provider";
-import { TYPOGRAPHY } from "@/theme";
+import { TYPOGRAPHY } from "@/styles/theme";
 import {
   GestureResponderEvent,
   StyleSheet,

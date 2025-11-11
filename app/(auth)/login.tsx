@@ -8,6 +8,7 @@ import {
 import { useAuth } from "@/providers/auth-provider";
 import { useTheme } from "@/providers/theme-provider";
 import { loginSchema } from "@/schemas";
+import { authStyles } from "@/styles";
 import { Feather } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
@@ -15,7 +16,6 @@ import { useState } from "react";
 import {
   Keyboard,
   Pressable,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
@@ -25,6 +25,8 @@ export default function Login() {
   const router = useRouter();
   const { signIn } = useAuth();
   const { theme } = useTheme();
+  const styles = authStyles(theme);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
@@ -58,30 +60,6 @@ export default function Login() {
       signIn();
     }
   };
-
-  const styles = StyleSheet.create({
-    inputContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      backgroundColor: theme.borderColor,
-      borderRadius: 12,
-      paddingHorizontal: 16,
-      paddingVertical: 12,
-      marginBottom: 16,
-      width: "100%",
-    },
-    input: {
-      flex: 1,
-      color: theme.textColor,
-      fontFamily: "HKGrotesk",
-    },
-    errorText: {
-      alignSelf: "flex-start",
-      marginBottom: 16,
-      marginLeft: 5,
-      marginTop: -8,
-    },
-  });
 
   return (
     <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
@@ -158,23 +136,24 @@ export default function Login() {
               <BodyText bold>Login</BodyText>
             </LinearGradient>
           </TouchableOpacity>
-        </View>
 
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            paddingBottom: 24,
-          }}
-        >
-          <TertiaryText>Don&apos;t have an account? </TertiaryText>
-          <GhostButton
-            onPress={() => router.replace("/signup")}
-            variant="accent"
-            small
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              paddingBottom: 24,
+              marginTop: 36,
+            }}
           >
-            Sign up
-          </GhostButton>
+            <TertiaryText>Don&apos;t have an account? </TertiaryText>
+            <GhostButton
+              onPress={() => router.replace("/signup")}
+              variant="accent"
+              small
+            >
+              Sign up
+            </GhostButton>
+          </View>
         </View>
       </PageContainer>
     </Pressable>
