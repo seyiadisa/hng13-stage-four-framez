@@ -38,6 +38,35 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            {
+              "fontFamily": "HKGrotesk",
+              "fontDefinitions": [
+                {
+                  "path": "./assets/fonts/HKGrotesk-Regular.otf",
+                  "weight": 400
+                },
+                {
+                  "path": ".assets/fonts/HKGrotesk-Bold.otf",
+                  "weight": 700
+                }
+              ]
+            },
+            {
+              "fontFamily": "Allura",
+              "fontDefinitions": [
+                {
+                  "path": "./assets/fonts/Allura-Regular.ttf",
+                  "weight": 400
+                }
+              ]
+            }
+          ]
+        }
       ]
     ],
     "experiments": {
