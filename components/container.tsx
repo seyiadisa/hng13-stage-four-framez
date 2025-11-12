@@ -36,6 +36,7 @@ export function ScrollContainer({ children }: { children: React.ReactNode }) {
       paddingInline: 20,
       color: theme.textColor,
       alignItems: "center",
+      minHeight: "100%",
     },
   });
 
