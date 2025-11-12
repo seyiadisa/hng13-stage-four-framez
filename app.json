@@ -40,6 +40,13 @@
         }
       ],
       [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Framez to access your photos to let you share them with your friends.",
+          "cameraPermission": "Allow Framez to access your camera to let you take pictures."
+        }
+      ],
+      [
         "expo-font",
         {
           "fonts": [
