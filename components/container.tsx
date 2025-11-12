@@ -27,9 +27,11 @@ export function PageContainer({ children }: { children: React.ReactNode }) {
 }
 
 export function PrimaryButton({
+  disabled,
   children,
   onPress,
 }: {
+  disabled?: boolean;
   children: React.ReactNode;
   onPress?: (e: GestureResponderEvent) => void;
 }) {
@@ -44,6 +46,7 @@ export function PrimaryButton({
         paddingBlock: 4,
       }}
       onPress={onPress}
+      disabled={disabled}
     >
       <SecondaryText>{children}</SecondaryText>
     </TouchableOpacity>
