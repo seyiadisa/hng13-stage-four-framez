@@ -24,7 +24,7 @@ import {
 } from "react-native";
 
 export default function Signup() {
-  const { signUp } = useAuth();
+  const { loading, signUp } = useAuth();
   const { theme } = useTheme();
   const router = useRouter();
   const styles = authStyles(theme);
@@ -84,7 +84,7 @@ export default function Signup() {
 
   const handleSignup = () => {
     if (validate()) {
-      signUp();
+      signUp(name, email, password);
     }
   };
 
@@ -207,6 +207,7 @@ export default function Signup() {
 
           <TouchableOpacity
             onPress={handleSignup}
+            disabled={loading}
             style={{
               width: "100%",
               borderRadius: 32,
@@ -214,14 +215,26 @@ export default function Signup() {
               marginTop: 24,
             }}
           >
-            <LinearGradient
-              colors={["#F62E8E", "#AC1AF0"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{ padding: 16, alignItems: "center" }}
-            >
-              <BodyText bold>Create an account</BodyText>
-            </LinearGradient>
+            {!loading ? (
+              <LinearGradient
+                colors={["#F62E8E", "#AC1AF0"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={{ padding: 16, alignItems: "center" }}
+              >
+                <BodyText bold>Create an account</BodyText>
+              </LinearGradient>
+            ) : (
+              <View
+                style={{
+                  padding: 16,
+                  alignItems: "center",
+                  backgroundColor: theme.borderColor,
+                }}
+              >
+                <BodyText bold>Create an account</BodyText>
+              </View>
+            )}
           </TouchableOpacity>
 
           <View

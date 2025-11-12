@@ -19,3 +19,12 @@ export const signupSchema = z
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
+export const usernameSchema = z
+  .string()
+  .min(3, "Username must be at least 3 characters long")
+  .max(20, "Username must be at most 20 characters long")
+  .regex(
+    /^[a-zA-Z0-9._]+$/,
+    "Username can only contain alphanumeric characters, underscores, and dots"
+  );

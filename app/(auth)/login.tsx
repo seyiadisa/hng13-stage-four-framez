@@ -23,7 +23,7 @@ import {
 
 export default function Login() {
   const router = useRouter();
-  const { signIn } = useAuth();
+  const { loading, signIn } = useAuth();
   const { theme } = useTheme();
   const styles = authStyles(theme);
 
@@ -57,7 +57,7 @@ export default function Login() {
 
   const handleLogin = () => {
     if (validate()) {
-      signIn();
+      signIn(email, password);
     }
   };
 
@@ -125,16 +125,29 @@ export default function Login() {
 
           <TouchableOpacity
             onPress={handleLogin}
+            disabled={loading}
             style={{ width: "100%", borderRadius: 32, overflow: "hidden" }}
           >
-            <LinearGradient
-              colors={["#F62E8E", "#AC1AF0"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{ padding: 16, alignItems: "center" }}
-            >
-              <BodyText bold>Login</BodyText>
-            </LinearGradient>
+            {!loading ? (
+              <LinearGradient
+                colors={["#F62E8E", "#AC1AF0"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={{ padding: 16, alignItems: "center" }}
+              >
+                <BodyText bold>Log in</BodyText>
+              </LinearGradient>
+            ) : (
+              <View
+                style={{
+                  padding: 16,
+                  alignItems: "center",
+                  backgroundColor: theme.borderColor,
+                }}
+              >
+                <BodyText bold>Log in</BodyText>
+              </View>
+            )}
           </TouchableOpacity>
 
           <View

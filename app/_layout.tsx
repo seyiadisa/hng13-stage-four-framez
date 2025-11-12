@@ -13,11 +13,11 @@ export default function RootLayout() {
 }
 
 function RootNavgiator() {
-  const { isLoggedIn } = useAuth();
+  const { session } = useAuth();
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Protected guard={isLoggedIn}>
+      <Stack.Protected guard={!!session}>
         <Stack.Screen name="(tabs)" />
       </Stack.Protected>
 
