@@ -2,6 +2,7 @@ import { useTheme } from "@/providers/theme-provider";
 import { TYPOGRAPHY } from "@/styles/theme";
 import {
   GestureResponderEvent,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -24,6 +25,23 @@ export function PageContainer({ children }: { children: React.ReactNode }) {
   });
 
   return <View style={styles.container}>{children}</View>;
+}
+
+export function ScrollContainer({ children }: { children: React.ReactNode }) {
+  const { theme } = useTheme();
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: theme.bgColor,
+      paddingTop: 48,
+      paddingInline: 20,
+      color: theme.textColor,
+      alignItems: "center",
+    },
+  });
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>{children}</ScrollView>
+  );
 }
 
 export function PrimaryButton({

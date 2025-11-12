@@ -1,5 +1,7 @@
-import { OutlineButton, PageContainer } from "@/components/container";
+import { OutlineButton, ScrollContainer } from "@/components/container";
+import Post from "@/components/post";
 import { BodyMutedText, BodyText, TitleText } from "@/components/typography";
+import { useProfile, useUserFollowers } from "@/hooks/use-profile";
 import { useTheme } from "@/providers/theme-provider";
 import { formatNumber } from "@/utils";
 import { Image } from "expo-image";
@@ -8,9 +10,13 @@ import { View } from "react-native";
 
 export default function Index() {
   const { theme } = useTheme();
+  const { data: posts } = useProfile();
+  const [{ data: followers }, { data: following }] = useUserFollowers();
+
+  console.log("Profile posts:", posts);
 
   return (
-    <PageContainer>
+    <ScrollContainer>
       <View
         style={{
           flexDirection: "column",
@@ -56,18 +62,21 @@ export default function Index() {
         }}
       >
         <View style={{ flexDirection: "column", gap: 4 }}>
-          <BodyText>{formatNumber(1000)}</BodyText>
+          <BodyText>{formatNumber(followers ? followers.length : 0)}</BodyText>
           <BodyMutedText>Followers</BodyMutedText>
         </View>
         <View style={{ flexDirection: "column", gap: 4 }}>
-          <BodyText>{formatNumber(2000)}</BodyText>
+          <BodyText>{formatNumber(following ? following.length : 0)}</BodyText>
           <BodyMutedText>Following</BodyMutedText>
         </View>
         <View>
           <OutlineButton>Edit Profile</OutlineButton>
         </View>
       </View>
-      <BodyText>TODO: Posts</BodyText>
-    </PageContainer>
+
+      {posts?.map((post) => (
+        <Post key={post.id} text={post.content} imagePath={post.media_url} />
+      ))}
+    </ScrollContainer>
   );
 }

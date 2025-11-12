@@ -22,7 +22,6 @@ export const uploadImage = async (
     return;
   }
 
-  console.log(data);
   return data.path;
 };
 
