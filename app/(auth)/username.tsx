@@ -52,7 +52,7 @@ export default function Username() {
 
   const handleSubmit = async () => {
     setName(username);
-    router.navigate("/");
+    router.replace("/");
   };
 
   return (

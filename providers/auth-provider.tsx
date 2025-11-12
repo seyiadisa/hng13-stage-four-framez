@@ -67,9 +67,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(false);
 
       if (data.username === email) {
-        router.navigate("/(auth)/username");
+        router.replace("/(auth)/username");
       } else {
-        router.navigate("/");
+        router.replace("/");
       }
     }
   };
@@ -91,14 +91,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const user = authData.user;
 
     if (user) {
-      const { error: db } = await supabase.from("profiles").insert({
+      await supabase.from("profiles").insert({
         id: user.id,
         name,
         username: email, // default username as email before user sets it
       });
 
       setLoading(false);
-      router.navigate("/(auth)/username");
+      router.replace("/(auth)/username");
     }
   };
 
