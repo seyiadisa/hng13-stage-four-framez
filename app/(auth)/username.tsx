@@ -27,15 +27,15 @@ export default function Username() {
 
   const validateUsername = async (name: string) => {
     const newErrors = { username: "" };
+    setErrors(newErrors);
     setUsername(name.toLowerCase());
 
     const result = usernameSchema.safeParse(username);
 
     if (!result.success) {
+      setIsValidUsername(false);
       for (const issue of result.error.issues) {
-        if (issue.path[0] === "username") {
-          newErrors.username = issue.message;
-        }
+        newErrors.username = issue.message;
       }
       setErrors(newErrors);
       return;
@@ -60,8 +60,7 @@ export default function Username() {
       <PageContainer>
         <View
           style={{
-            flex: 1,
-            justifyContent: "center",
+            marginTop: 60,
             alignItems: "center",
             width: "100%",
           }}
