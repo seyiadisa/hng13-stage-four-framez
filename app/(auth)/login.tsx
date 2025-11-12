@@ -66,8 +66,7 @@ export default function Login() {
       <PageContainer>
         <View
           style={{
-            flex: 1,
-            justifyContent: "center",
+            marginTop: 30,
             alignItems: "center",
             width: "100%",
           }}
@@ -117,11 +116,11 @@ export default function Login() {
             </View>
           )}
 
-          <View style={{ alignSelf: "flex-end", marginBottom: 24 }}>
+          {/* <View style={{ alignSelf: "flex-end", marginBottom: 24 }}>
             <GhostButton variant="accent" small>
               Forgot Password?
             </GhostButton>
-          </View>
+          </View> */}
 
           <TouchableOpacity
             onPress={handleLogin}

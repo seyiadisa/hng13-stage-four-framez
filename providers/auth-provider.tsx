@@ -97,8 +97,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         username: email, // default username as email before user sets it
       });
 
-      console.log(db);
-
       setLoading(false);
       router.navigate("/(auth)/username");
     }

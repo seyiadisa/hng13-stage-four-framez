@@ -93,8 +93,7 @@ export default function Signup() {
       <PageContainer>
         <View
           style={{
-            flex: 1,
-            justifyContent: "center",
+            marginTop: 30,
             alignItems: "center",
             width: "100%",
           }}
