@@ -19,6 +19,7 @@ function RootNavgiator() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={!!session}>
         <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="(pages)" />
       </Stack.Protected>
 
       <Stack.Screen name="(auth)/login" />

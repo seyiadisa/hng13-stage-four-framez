@@ -4,16 +4,17 @@ import { BodyMutedText, BodyText, TitleText } from "@/components/typography";
 import { useProfile, useUserFollowers } from "@/hooks/use-profile";
 import { useTheme } from "@/providers/theme-provider";
 import { formatNumber } from "@/utils";
+import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { View } from "react-native";
+import { useRouter } from "expo-router";
+import { TouchableOpacity, View } from "react-native";
 
 export default function Index() {
   const { theme } = useTheme();
+  const router = useRouter();
   const { data: posts } = useProfile();
   const [{ data: followers }, { data: following }] = useUserFollowers();
-
-  console.log("Profile posts:", posts);
 
   return (
     <ScrollContainer>
@@ -21,6 +22,7 @@ export default function Index() {
         style={{
           flexDirection: "column",
           alignItems: "center",
+          width: "100%",
           gap: 6,
           marginBottom: 24,
         }}
@@ -50,6 +52,14 @@ export default function Index() {
         <TitleText>Seyi Adisa</TitleText>
         <BodyMutedText>Lagos, Nigeria</BodyMutedText>
         <BodyText>Software Developer</BodyText>
+
+        <View style={{ position: "absolute", top: 10, right: 0 }}>
+          <TouchableOpacity
+            onPress={() => router.navigate("/(pages)/settings")}
+          >
+            <AntDesign name="setting" color={theme.textColor} size={24} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View
