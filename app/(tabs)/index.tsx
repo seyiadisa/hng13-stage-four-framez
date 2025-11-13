@@ -32,6 +32,7 @@ export default function Index() {
             poster_id={post.author_id}
             text={post.content}
             imagePath={post.media_url}
+            createdAt={post.created_at}
           />
         ))
       )}

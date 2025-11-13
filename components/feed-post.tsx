@@ -4,16 +4,18 @@ import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { View } from "react-native";
 import Post from "./post";
-import { BodyText } from "./typography";
+import { BodyText, SecondaryMutedText } from "./typography";
 
 export default function FeedPost({
   text,
   imagePath,
   poster_id,
+  createdAt,
 }: {
   text?: string;
   imagePath?: string;
   poster_id?: string;
+  createdAt: string;
 }) {
   const { theme } = useTheme();
   const { data: profile } = useProfileInfo(poster_id);
@@ -27,30 +29,61 @@ export default function FeedPost({
         borderTopColor: theme.borderColor,
       }}
     >
-      {poster_id && (
-        <Link
-          href={{
-            pathname: "/(pages)/user/[userId]",
-            params: { userId: poster_id },
-          }}
+      {poster_id ? (
+        <View
           style={{
             marginBottom: 12,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              gap: 8,
+          <Link
+            href={{
+              pathname: "/(pages)/user/[userId]",
+              params: { userId: poster_id },
             }}
           >
-            <Image
-              source={{ uri: profile?.avatar_url }}
-              style={{ width: 32, height: 32, borderRadius: 16 }}
-            />
-            <BodyText>{profile?.username}</BodyText>
-          </View>
-        </Link>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <Image
+                source={{ uri: profile?.avatar_url }}
+                style={{ width: 32, height: 32, borderRadius: 16 }}
+              />
+              <BodyText>{profile?.username}</BodyText>
+            </View>
+          </Link>
+
+          <SecondaryMutedText>
+            {new Date(createdAt).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </SecondaryMutedText>
+        </View>
+      ) : (
+        <View
+          style={{
+            marginBottom: 12,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
+        >
+          <SecondaryMutedText>
+            {new Date(createdAt).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </SecondaryMutedText>
+        </View>
       )}
       <Post text={text} imagePath={imagePath} />
     </View>
