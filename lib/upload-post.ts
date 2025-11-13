@@ -37,7 +37,7 @@ export const uploadTextPost = async (text: string, imagePath?: string) => {
   });
 
   if (error) {
-    Alert.alert("Error uploading image", error.message);
+    Alert.alert("Error uploading text", error.message);
     return;
   }
 };

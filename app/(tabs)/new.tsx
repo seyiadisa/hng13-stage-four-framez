@@ -30,8 +30,6 @@ export default function Index() {
 
     if (!result.canceled) {
       setImage(result.assets[0]);
-      // You can now call uploadImage when the user presses "Publish"
-      // For example: const uploadedPath = await uploadImage(result.assets[0]);
     }
   };
 
@@ -52,14 +50,10 @@ export default function Index() {
     });
     if (!result.canceled) {
       setImage(result.assets[0]);
-      // You can now call uploadImage when the user presses "Publish"
-      // For example: const uploadedPath = await uploadImage(result.assets[0]);
     }
   };
 
   const publishPost = async () => {
-    // Here you would handle publishing the post,
-    // including uploading the image if one was selected.
     setLoading(true);
     let imagePath: string | undefined = undefined;
 

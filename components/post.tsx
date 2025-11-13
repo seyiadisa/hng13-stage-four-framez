@@ -17,7 +17,7 @@ export default function Post({
   return (
     <View
       style={{
-        marginBottom: 24,
+        paddingBlock: 24,
         borderTopWidth: 1,
         borderTopColor: theme.borderColor,
         width: "100%",
