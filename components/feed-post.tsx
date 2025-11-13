@@ -1,6 +1,7 @@
 import { useProfileInfo } from "@/hooks/use-profile";
 import { useTheme } from "@/providers/theme-provider";
 import { Image } from "expo-image";
+import { Link } from "expo-router";
 import { View } from "react-native";
 import Post from "./post";
 import { BodyText } from "./typography";
@@ -27,20 +28,29 @@ export default function FeedPost({
       }}
     >
       {poster_id && (
-        <View
+        <Link
+          href={{
+            pathname: "/(pages)/user/[userId]",
+            params: { userId: poster_id },
+          }}
           style={{
             marginBottom: 12,
-            flexDirection: "row",
-            alignItems: "center",
-            gap: 8,
           }}
         >
-          <Image
-            source={{ uri: profile?.avatar_url }}
-            style={{ width: 32, height: 32, borderRadius: 16 }}
-          />
-          <BodyText>{profile?.username}</BodyText>
-        </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            <Image
+              source={{ uri: profile?.avatar_url }}
+              style={{ width: 32, height: 32, borderRadius: 16 }}
+            />
+            <BodyText>{profile?.username}</BodyText>
+          </View>
+        </Link>
       )}
       <Post text={text} imagePath={imagePath} />
     </View>

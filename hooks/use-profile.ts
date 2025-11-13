@@ -30,17 +30,22 @@ export const useProfileInfo = (userId?: string) => {
   });
 };
 
-export const useProfilePosts = () => {
+export const useProfilePosts = (userId?: string) => {
   return useQuery({
-    queryKey: ["profile_posts"],
+    queryKey: ["profile_posts", userId],
     queryFn: async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      if (!userId) {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        userId = user!.id;
+      }
+
       const { data, error } = await supabase
         .from("posts")
         .select("*")
-        .eq("author_id", user!.id)
+        .eq("author_id", userId)
         .order("created_at", { ascending: false });
 
       if (error) {
