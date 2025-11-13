@@ -1,19 +1,25 @@
-# Welcome to your Expo app 👋
+# Welcome to Framez by Oluwaseyi Adisa 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+
+[Hosted Appetize Link](https://appetize.io/app/b_xx33pujprweffdu77daduogkqu)
+
+[Hosted Appetize Link](https://appetize.io/app/b_xx33pujprweffdu77daduogkqu)
+
+[Hosted Appetize Link](https://appetize.io/app/b_xx33pujprweffdu77daduogkqu)
 
 ## Get started
 
 1. Install dependencies
 
    ```bash
-   npm install
+   bun install
    ```
 
 2. Start the app
 
    ```bash
-   npx expo start
+   bun run start
    ```
 
 In the output, you'll find options to open the app in a
@@ -23,28 +29,24 @@ In the output, you'll find options to open the app in a
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Backend
 
-## Get a fresh project
+This project utilizes [Supabase](https://supabase.com) for its backend. Supabase provides a robust and scalable infrastructure that handles user authentication, data storage, and other essential backend functionalities.
 
-When you're ready, run:
+Key Supabase services used:
 
-```bash
-npm run reset-project
-```
+- **Supabase Authentication:** For secure user sign-up and login with email and password.
+- **Supabase Database:** A PostgreSQL database to store image URLs and user information.
+- **Supabase Storage:** To upload and store user images securely.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Features Implemented
 
-## Learn more
+- **User Authentication:** Users can create an account and log in using their email and password. Note that email authentication was turned off for this project to allow for the creation of dummy accounts.
+- **Post Upload:** Users can upload text-based posts with optional image attachments, which is stored in Supabase Storage.
+- **Followers Count**: Users can follow other users to view their posts in a home feed.
 
-To learn more about developing your project with Expo, look at the following resources:
+[Hosted Appetize Link](https://appetize.io/app/b_xx33pujprweffdu77daduogkqu)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+[Hosted Appetize Link](https://appetize.io/app/b_xx33pujprweffdu77daduogkqu)
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+[Hosted Appetize Link](https://appetize.io/app/b_xx33pujprweffdu77daduogkqu)
