@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { Session } from "@supabase/supabase-js";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
@@ -34,6 +35,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const { data: defaultAvatar } = useQuery({
+    queryKey: ["default_avatar"],
+    queryFn: async () => {
+      const { data } = supabase.storage
+        .from("avatars")
+        .getPublicUrl("profile.png");
+      return data;
+    },
+  });
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -94,6 +105,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       await supabase.from("profiles").insert({
         id: user.id,
         name,
+        avatar_url: defaultAvatar?.publicUrl,
         username: email, // default username as email before user sets it
       });
 
