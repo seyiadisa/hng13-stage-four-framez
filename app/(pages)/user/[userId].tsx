@@ -1,4 +1,8 @@
-import { ScrollContainer } from "@/components/container";
+import {
+  GradientButton,
+  OutlineButton,
+  ScrollContainer,
+} from "@/components/container";
 import FeedPost from "@/components/feed-post";
 import { BodyMutedText, BodyText, TitleText } from "@/components/typography";
 import {
@@ -7,11 +11,13 @@ import {
   useProfileInfo,
   useProfilePosts,
 } from "@/hooks/use-profile";
+import { supabase } from "@/lib/supabase";
 import { useTheme } from "@/providers/theme-provider";
 import { formatNumber } from "@/utils";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 
 export default function UserProfile() {
@@ -20,7 +26,54 @@ export default function UserProfile() {
   const { data: profile } = useProfileInfo(userId as string);
   const { data: posts } = useProfilePosts(userId as string);
   const { data: followers } = useFollowers(userId as string);
-  const { data: following } = useFollowing(userId as string);
+  const { data: following, refetch: refetchFollowing } = useFollowing(
+    userId as string
+  );
+  const { data: currentUser } = useProfileInfo();
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const currentUserId = currentUser?.id;
+
+  useEffect(() => {
+    if (followers && currentUserId) {
+      setIsFollowing(
+        followers.some((follower) => follower.follower_id === currentUserId)
+      );
+    }
+  }, [followers, currentUserId]);
+
+  const handleFollow = async () => {
+    if (!currentUserId) return;
+    setLoading(true);
+
+    const { error } = await supabase.from("follows").insert({
+      follower_id: currentUserId,
+      following_id: userId,
+    });
+    if (!error) {
+      setIsFollowing(true);
+    }
+    setLoading(false);
+    refetchFollowing();
+  };
+
+  const handleUnfollow = async () => {
+    if (!currentUserId) return;
+    setLoading(true);
+
+    const { error } = await supabase
+      .from("follows")
+      .delete()
+      .eq("follower_id", currentUserId)
+      .eq("following_id", userId);
+
+    if (!error) {
+      setIsFollowing(false);
+    }
+    setLoading(false);
+    refetchFollowing();
+  };
 
   return (
     <ScrollContainer>
@@ -66,10 +119,9 @@ export default function UserProfile() {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "flex-start",
+          justifyContent: "space-between",
           width: "100%",
           marginBottom: 24,
-          gap: 32,
         }}
       >
         <View style={{ flexDirection: "column", gap: 4 }}>
@@ -79,6 +131,15 @@ export default function UserProfile() {
         <View style={{ flexDirection: "column", gap: 4 }}>
           <BodyText>{formatNumber(following ? following.length : 0)}</BodyText>
           <BodyMutedText>Following</BodyMutedText>
+        </View>
+        <View>
+          {isFollowing ? (
+            <OutlineButton onPress={handleUnfollow}>Unfollow</OutlineButton>
+          ) : (
+            <GradientButton loading={loading} onPress={handleFollow}>
+              Follow
+            </GradientButton>
+          )}
         </View>
       </View>
 
