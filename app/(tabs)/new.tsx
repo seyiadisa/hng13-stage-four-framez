@@ -4,6 +4,7 @@ import {
   PrimaryButton,
 } from "@/components/container";
 import { BodyMutedText } from "@/components/typography";
+import { useProfileInfo } from "@/hooks/use-profile";
 import { uploadImage, uploadTextPost } from "@/lib/upload-post";
 import { useTheme } from "@/providers/theme-provider";
 import { AntDesign, FontAwesome6 } from "@expo/vector-icons";
@@ -19,6 +20,7 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<ImagePicker.ImagePickerAsset | null>(null);
   const [isAttachmentPillOpen, setIsAttachmentPillOpen] = useState(false);
+  const { data: profile } = useProfileInfo();
   const queryClient = useQueryClient();
 
   const pickImage = async () => {
@@ -107,7 +109,7 @@ export default function Index() {
             style={{ flexDirection: "row", alignItems: "flex-start", gap: 20 }}
           >
             <Image
-              source={require("@/assets/images/profile.jpg")}
+              source={{ uri: profile?.avatar_url }}
               style={{
                 width: 56,
                 height: 56,
