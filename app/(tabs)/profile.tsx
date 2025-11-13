@@ -3,12 +3,13 @@ import {
   OutlineButton,
   ScrollContainer,
 } from "@/components/container";
-import Post from "@/components/post";
+import FeedPost from "@/components/feed-post";
 import { BodyMutedText, BodyText, TitleText } from "@/components/typography";
 import {
+  useFollowers,
+  useFollowing,
   useProfileInfo,
   useProfilePosts,
-  useUserFollowers,
 } from "@/hooks/use-profile";
 import { uploadImage, uploadProfileText } from "@/lib/upload-profile";
 import { useTheme } from "@/providers/theme-provider";
@@ -27,7 +28,8 @@ export default function Index() {
   const router = useRouter();
   const { data: posts } = useProfilePosts();
   const { data: profile, refetch: refetchProfile } = useProfileInfo();
-  const [{ data: followers }, { data: following }] = useUserFollowers();
+  const { data: followers } = useFollowers();
+  const { data: following } = useFollowing();
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("Your name");
   const [bio, setBio] = useState("Your bio");
@@ -198,7 +200,11 @@ export default function Index() {
       </View>
 
       {posts?.map((post) => (
-        <Post key={post.id} text={post.content} imagePath={post.media_url} />
+        <FeedPost
+          key={post.id}
+          text={post.content}
+          imagePath={post.media_url}
+        />
       ))}
     </ScrollContainer>
   );

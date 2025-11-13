@@ -1,23 +1,27 @@
 import { supabase } from "@/lib/supabase";
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Alert } from "react-native";
 
-export const useProfileInfo = () => {
+export const useProfileInfo = (userId?: string) => {
   return useQuery({
-    queryKey: ["profile_info"],
+    queryKey: ["profile_info", userId],
     queryFn: async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      if (!userId) {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        userId = user!.id;
+      }
 
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
-        .eq("id", user!.id)
+        .eq("id", userId)
         .single();
 
       if (error) {
-        Alert.alert("Error fetching personal posts", error.message);
+        Alert.alert("Error fetching profile", error.message);
         return {};
       }
 
@@ -49,46 +53,45 @@ export const useProfilePosts = () => {
   });
 };
 
-export const useUserFollowers = (userId?: string) => {
-  return useQueries({
-    queries: [
-      {
-        queryKey: ["userFollowers", userId],
-        queryFn: async () => {
-          const {
-            data: { user },
-          } = await supabase.auth.getUser();
+export const useFollowers = (userId?: string) => {
+  return useQuery({
+    queryKey: ["userFollowers", userId],
+    queryFn: async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-          if (!userId) {
-            userId = user!.id;
-          }
+      if (!userId) {
+        userId = user!.id;
+      }
 
-          const { data } = await supabase
-            .from("follows")
-            .select("*")
-            .eq("following_id", userId);
-          return data;
-        },
-      },
-      {
-        queryKey: ["userFollowing", userId],
-        queryFn: async () => {
-          const {
-            data: { user },
-          } = await supabase.auth.getUser();
+      const { data } = await supabase
+        .from("follows")
+        .select("*")
+        .eq("following_id", userId);
+      return data;
+    },
+  });
+};
 
-          if (!userId) {
-            userId = user!.id;
-          }
+export const useFollowing = (userId?: string) => {
+  return useQuery({
+    queryKey: ["userFollowing", userId],
+    queryFn: async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
 
-          const { data } = await supabase
-            .from("follows")
-            .select("*")
-            .eq("follower_id", userId);
+      if (!userId) {
+        userId = user!.id;
+      }
 
-          return data;
-        },
-      },
-    ],
+      const { data } = await supabase
+        .from("follows")
+        .select("*")
+        .eq("follower_id", userId);
+
+      return data;
+    },
   });
 };
