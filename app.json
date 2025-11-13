@@ -48,35 +48,7 @@
           "cameraPermission": "Allow Framez to access your camera to let you take pictures."
         }
       ],
-      [
-        "expo-font",
-        {
-          "fonts": [
-            {
-              "fontFamily": "HKGrotesk",
-              "fontDefinitions": [
-                {
-                  "path": "./assets/fonts/HKGrotesk-Regular.otf",
-                  "weight": 400
-                },
-                {
-                  "path": ".assets/fonts/HKGrotesk-Bold.otf",
-                  "weight": 700
-                }
-              ]
-            },
-            {
-              "fontFamily": "Allura",
-              "fontDefinitions": [
-                {
-                  "path": "./assets/fonts/Allura-Regular.ttf",
-                  "weight": 400
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      ["expo-font", {}]
     ],
     "experiments": {
       "typedRoutes": true,

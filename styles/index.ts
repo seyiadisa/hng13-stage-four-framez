@@ -16,7 +16,7 @@ export const authStyles = (theme: ThemeColors) =>
     input: {
       flex: 1,
       color: theme.textColor,
-      fontFamily: "HKGrotesk",
+      // fontFamily: "HKGrotesk",
     },
     errorText: {
       alignSelf: "flex-start",

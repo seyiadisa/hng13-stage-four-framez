@@ -8,7 +8,7 @@ export const BrandText = ({ children }: { children: React.ReactNode }) => {
   return (
     <Text
       style={{
-        fontFamily: "Allura",
+        // fontFamily: "Allura",
         fontSize: 40,
         color: theme.textColor,
       }}
@@ -29,7 +29,7 @@ export const TitleText = ({
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.title,
         color: theme.textColor,
         fontWeight: bold ? 700 : 400,
@@ -46,7 +46,7 @@ export const TitleMutedText = ({ children }: { children: React.ReactNode }) => {
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.title,
         color: theme.textMutedColor,
       }}
@@ -68,7 +68,7 @@ export const BodyText = ({
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.body,
         color: theme.textColor,
         fontWeight: bold ? 700 : 400,
@@ -85,7 +85,7 @@ export const BodyMutedText = ({ children }: { children: React.ReactNode }) => {
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.body,
         color: theme.textMutedColor,
       }}
@@ -101,7 +101,7 @@ export const SecondaryText = ({ children }: { children: React.ReactNode }) => {
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.secondary,
         color: theme.textColor,
       }}
@@ -121,7 +121,7 @@ export const SecondaryMutedText = ({
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.secondary,
         color: theme.textMutedColor,
       }}
@@ -137,7 +137,7 @@ export const TertiaryText = ({ children }: { children: React.ReactNode }) => {
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.tertiary,
         color: theme.textColor,
       }}
@@ -157,7 +157,7 @@ export const TertiaryMutedText = ({
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.tertiary,
         color: theme.textMutedColor,
       }}
@@ -173,7 +173,7 @@ export const ErrorText = ({ children }: { children: React.ReactNode }) => {
   return (
     <Text
       style={{
-        fontFamily: "HKGrotesk",
+        // fontFamily: "HKGrotesk",
         fontSize: TYPOGRAPHY.sizes.tertiary,
         color: theme.errorColor,
       }}
