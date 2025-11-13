@@ -148,6 +148,7 @@ export default function UserProfile() {
           key={post.id}
           text={post.content}
           imagePath={post.media_url}
+          createdAt={post.created_at}
         />
       ))}
     </ScrollContainer>
