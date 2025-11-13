@@ -2,9 +2,33 @@ import { supabase } from "@/lib/supabase";
 import { useQueries, useQuery } from "@tanstack/react-query";
 import { Alert } from "react-native";
 
-export const useProfile = () => {
+export const useProfileInfo = () => {
   return useQuery({
-    queryKey: ["profile"],
+    queryKey: ["profile_info"],
+    queryFn: async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user!.id)
+        .single();
+
+      if (error) {
+        Alert.alert("Error fetching personal posts", error.message);
+        return {};
+      }
+
+      return data;
+    },
+  });
+};
+
+export const useProfilePosts = () => {
+  return useQuery({
+    queryKey: ["profile_posts"],
     queryFn: async () => {
       const {
         data: { user },
