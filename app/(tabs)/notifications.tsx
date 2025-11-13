@@ -1,5 +1,5 @@
 import { GhostButton, PageContainer } from "@/components/container";
-import { BodyText, TitleText } from "@/components/typography";
+import { BodyMutedText, TitleText } from "@/components/typography";
 import { View } from "react-native";
 
 export default function Index() {
@@ -18,7 +18,7 @@ export default function Index() {
       </View>
 
       <View>
-        <BodyText>TODO: Notifications</BodyText>
+        <BodyMutedText>Coming Soon</BodyMutedText>
       </View>
     </PageContainer>
   );
