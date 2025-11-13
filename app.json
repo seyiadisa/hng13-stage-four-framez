@@ -21,7 +21,9 @@
       "package": "com.seyi.framez",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "permissions": ["android.permission.RECORD_AUDIO"]
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "output": "static",
@@ -48,7 +50,10 @@
           "cameraPermission": "Allow Framez to access your camera to let you take pictures."
         }
       ],
-      ["expo-font", {}]
+      [
+        "expo-font",
+        {}
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
@@ -57,7 +62,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "5e3295bd-f633-42b8-80e3-b3306df2b086"
+        "projectId": "ff350099-c829-4d21-aa9f-2a81d91be380"
       }
     }
   }
