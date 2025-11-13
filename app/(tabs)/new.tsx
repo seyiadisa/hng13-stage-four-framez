@@ -7,10 +7,11 @@ import { BodyMutedText } from "@/components/typography";
 import { uploadImage, uploadTextPost } from "@/lib/upload-post";
 import { useTheme } from "@/providers/theme-provider";
 import { AntDesign, FontAwesome6 } from "@expo/vector-icons";
+import { useQueryClient } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
-import { Keyboard, Pressable, TextInput, View } from "react-native";
+import { Alert, Keyboard, Pressable, TextInput, View } from "react-native";
 
 export default function Index() {
   const { theme } = useTheme();
@@ -18,6 +19,7 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState<ImagePicker.ImagePickerAsset | null>(null);
   const [isAttachmentPillOpen, setIsAttachmentPillOpen] = useState(false);
+  const queryClient = useQueryClient();
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -54,6 +56,11 @@ export default function Index() {
   };
 
   const publishPost = async () => {
+    if (text.trim() === "") {
+      Alert.alert("Text cannot be empty");
+      return;
+    }
+
     setLoading(true);
     let imagePath: string | undefined = undefined;
 
@@ -61,9 +68,8 @@ export default function Index() {
       imagePath = await uploadImage(image);
     }
 
-    if (text.trim() !== "") {
-      uploadTextPost(text, imagePath);
-    }
+    await uploadTextPost(text, imagePath);
+    queryClient.invalidateQueries({ queryKey: ["profile_posts"] });
 
     setLoading(false);
     setText("");

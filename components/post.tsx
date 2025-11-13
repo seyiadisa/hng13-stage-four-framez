@@ -1,6 +1,4 @@
-import { supabase } from "@/lib/supabase";
 import { useTheme } from "@/providers/theme-provider";
-import { useQuery } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { View } from "react-native";
 import { BodyText } from "./typography";
@@ -37,27 +35,9 @@ export default function Post({
 }
 
 const PostImage = ({ imagePath }: { imagePath: string }) => {
-  const { theme } = useTheme();
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["postImage", imagePath],
-    queryFn: async () => {
-      const { data } = supabase.storage.from("posts").getPublicUrl(imagePath);
-      return data;
-    },
-  });
-
-  const imageUrl = data?.publicUrl;
-
-  if (isLoading || !imageUrl) {
-    return (
-      <View style={{ aspectRatio: 1, backgroundColor: theme.borderColor }} />
-    );
-  }
-
   return (
     <Image
-      source={{ uri: imageUrl }}
+      source={{ uri: imagePath }}
       style={{ width: 300, aspectRatio: 1, borderRadius: 12 }}
     />
   );

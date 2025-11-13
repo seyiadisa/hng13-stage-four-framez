@@ -22,7 +22,11 @@ export const uploadImage = async (
     return;
   }
 
-  return data.path;
+  const { data: image } = supabase.storage
+    .from("posts")
+    .getPublicUrl(data.path);
+
+  return image.publicUrl;
 };
 
 export const uploadTextPost = async (text: string, imagePath?: string) => {
