@@ -129,7 +129,7 @@ export default function Login() {
           >
             {!loading ? (
               <LinearGradient
-                colors={["#F62E8E", "#AC1AF0"]}
+                colors={theme.gradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
                 style={{ padding: 16, alignItems: "center" }}

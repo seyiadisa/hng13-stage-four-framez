@@ -56,7 +56,7 @@ export default function TabLayout() {
           options={{
             tabBarIcon: () => (
               <LinearGradient
-                colors={["#F62E8E", "#AC1AF0"]}
+                colors={theme.gradient}
                 style={{
                   width: 48,
                   height: 48,

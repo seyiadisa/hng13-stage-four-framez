@@ -1,3 +1,5 @@
+const GRADIENT = ["#F62E8E", "#AC1AF0"] as const;
+
 export type ThemeColors = {
   bgColor: string;
   textColor: string;
@@ -7,17 +9,19 @@ export type ThemeColors = {
   primary: string;
   accent: string;
   errorColor: string;
+  gradient: typeof GRADIENT;
 };
 
 export const lightTheme: ThemeColors = {
-  bgColor: "#000",
-  textColor: "#ecebed",
-  textMutedColor: "#727477",
-  tabBgColor: "#000",
-  borderColor: "#323436",
+  bgColor: "#ffffff",
+  textColor: "#1a1a1a",
+  textMutedColor: "#8c8c8c",
+  tabBgColor: "#f2f2f2",
+  borderColor: "#e0e0e0",
   primary: "#F62E8E",
   accent: "#2E8AF6",
   errorColor: "#dc2626",
+  gradient: GRADIENT,
 };
 
 export const darkTheme: ThemeColors = {
@@ -29,6 +33,7 @@ export const darkTheme: ThemeColors = {
   primary: "#F62E8E",
   accent: "#2E8AF6",
   errorColor: "#ef4444",
+  gradient: GRADIENT,
 };
 
 export const SPACING = {

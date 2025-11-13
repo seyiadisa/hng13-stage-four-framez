@@ -28,7 +28,7 @@ export default function Index() {
         }}
       >
         <LinearGradient
-          colors={["#F62E8E", "#AC1AF0"]}
+          colors={theme.gradient}
           style={{
             width: 106,
             height: 106,
