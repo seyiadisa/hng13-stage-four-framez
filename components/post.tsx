@@ -1,4 +1,3 @@
-import { useTheme } from "@/providers/theme-provider";
 import { Image } from "expo-image";
 import { View } from "react-native";
 import { BodyText } from "./typography";
@@ -10,14 +9,9 @@ export default function Post({
   text?: string;
   imagePath?: string;
 }) {
-  const { theme } = useTheme();
-
   return (
     <View
       style={{
-        paddingBlock: 24,
-        borderTopWidth: 1,
-        borderTopColor: theme.borderColor,
         width: "100%",
         alignItems: "center",
       }}

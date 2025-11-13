@@ -38,6 +38,7 @@ export function ScrollContainer({ children }: { children: React.ReactNode }) {
       color: theme.textColor,
       alignItems: "center",
       minHeight: "100%",
+      width: "100%",
     },
   });
 
