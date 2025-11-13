@@ -1,17 +1,15 @@
-import { GhostButton, PageContainer } from "@/components/container";
 import {
-  BodyText,
-  BrandText,
-  ErrorText,
-  TertiaryText,
-} from "@/components/typography";
+  GhostButton,
+  GradientButton,
+  PageContainer,
+} from "@/components/container";
+import { BrandText, ErrorText, TertiaryText } from "@/components/typography";
 import { useAuth } from "@/providers/auth-provider";
 import { useTheme } from "@/providers/theme-provider";
 import { signupSchema } from "@/schemas";
 import { authStyles } from "@/styles";
 import { TYPOGRAPHY } from "@/styles/theme";
 import { Feather } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -204,37 +202,9 @@ export default function Signup() {
             </View>
           )}
 
-          <TouchableOpacity
-            onPress={handleSignup}
-            disabled={loading}
-            style={{
-              width: "100%",
-              borderRadius: 32,
-              overflow: "hidden",
-              marginTop: 24,
-            }}
-          >
-            {!loading ? (
-              <LinearGradient
-                colors={theme.gradient}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={{ padding: 16, alignItems: "center" }}
-              >
-                <BodyText bold>Create an account</BodyText>
-              </LinearGradient>
-            ) : (
-              <View
-                style={{
-                  padding: 16,
-                  alignItems: "center",
-                  backgroundColor: theme.borderColor,
-                }}
-              >
-                <BodyText bold>Create an account</BodyText>
-              </View>
-            )}
-          </TouchableOpacity>
+          <GradientButton onPress={handleSignup} loading={loading}>
+            Create an account
+          </GradientButton>
 
           <View
             style={{

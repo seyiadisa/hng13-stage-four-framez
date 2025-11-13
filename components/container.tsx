@@ -1,5 +1,6 @@
 import { useTheme } from "@/providers/theme-provider";
-import { TYPOGRAPHY } from "@/styles/theme";
+import { darkTheme, TYPOGRAPHY } from "@/styles/theme";
+import { LinearGradient } from "expo-linear-gradient";
 import {
   GestureResponderEvent,
   ScrollView,
@@ -124,3 +125,59 @@ export function GhostButton({
     </TouchableOpacity>
   );
 }
+
+export const GradientButton = ({
+  loading,
+  onPress,
+  children,
+}: {
+  loading: boolean;
+  onPress: () => void;
+  children: React.ReactNode;
+}) => {
+  const { theme } = useTheme();
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      disabled={loading}
+      style={{ width: "100%", borderRadius: 32, overflow: "hidden" }}
+    >
+      {!loading ? (
+        <LinearGradient
+          colors={theme.gradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={{ padding: 16, alignItems: "center" }}
+        >
+          <Text
+            style={{
+              fontSize: TYPOGRAPHY.sizes.body,
+              fontWeight: 700,
+              color: darkTheme.textColor,
+            }}
+          >
+            {children}
+          </Text>
+        </LinearGradient>
+      ) : (
+        <View
+          style={{
+            padding: 16,
+            alignItems: "center",
+            backgroundColor: theme.borderColor,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: TYPOGRAPHY.sizes.body,
+              fontWeight: 700,
+              color: darkTheme.textColor,
+            }}
+          >
+            {children}
+          </Text>
+        </View>
+      )}
+    </TouchableOpacity>
+  );
+};

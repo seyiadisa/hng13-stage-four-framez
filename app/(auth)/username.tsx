@@ -1,15 +1,17 @@
 import { PageContainer } from "@/components/container";
-import { BodyText, ErrorText } from "@/components/typography";
+import { ErrorText } from "@/components/typography";
 import { useAuth } from "@/providers/auth-provider";
 import { useTheme } from "@/providers/theme-provider";
 import { usernameSchema } from "@/schemas";
 import { authStyles } from "@/styles";
+import { darkTheme, TYPOGRAPHY } from "@/styles/theme";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Keyboard,
   Pressable,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -98,7 +100,15 @@ export default function Username() {
                 end={{ x: 1, y: 1 }}
                 style={{ padding: 16, alignItems: "center" }}
               >
-                <BodyText bold>Select username</BodyText>
+                <Text
+                  style={{
+                    fontSize: TYPOGRAPHY.sizes.body,
+                    fontWeight: 700,
+                    color: darkTheme.textColor,
+                  }}
+                >
+                  Select username
+                </Text>
               </LinearGradient>
             ) : (
               <View
@@ -108,7 +118,15 @@ export default function Username() {
                   backgroundColor: theme.borderColor,
                 }}
               >
-                <BodyText bold>Select username</BodyText>
+                <Text
+                  style={{
+                    fontSize: TYPOGRAPHY.sizes.body,
+                    fontWeight: 700,
+                    color: darkTheme.textColor,
+                  }}
+                >
+                  Select username
+                </Text>
               </View>
             )}
           </TouchableOpacity>

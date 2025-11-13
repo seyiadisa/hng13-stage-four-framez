@@ -1,16 +1,14 @@
-import { GhostButton, PageContainer } from "@/components/container";
 import {
-  BodyText,
-  BrandText,
-  ErrorText,
-  TertiaryText,
-} from "@/components/typography";
+  GhostButton,
+  GradientButton,
+  PageContainer,
+} from "@/components/container";
+import { BrandText, ErrorText, TertiaryText } from "@/components/typography";
 import { useAuth } from "@/providers/auth-provider";
 import { useTheme } from "@/providers/theme-provider";
 import { loginSchema } from "@/schemas";
 import { authStyles } from "@/styles";
 import { Feather } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -122,32 +120,9 @@ export default function Login() {
             </GhostButton>
           </View> */}
 
-          <TouchableOpacity
-            onPress={handleLogin}
-            disabled={loading}
-            style={{ width: "100%", borderRadius: 32, overflow: "hidden" }}
-          >
-            {!loading ? (
-              <LinearGradient
-                colors={theme.gradient}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={{ padding: 16, alignItems: "center" }}
-              >
-                <BodyText bold>Log in</BodyText>
-              </LinearGradient>
-            ) : (
-              <View
-                style={{
-                  padding: 16,
-                  alignItems: "center",
-                  backgroundColor: theme.borderColor,
-                }}
-              >
-                <BodyText bold>Log in</BodyText>
-              </View>
-            )}
-          </TouchableOpacity>
+          <GradientButton onPress={handleLogin} loading={loading}>
+            Log in
+          </GradientButton>
 
           <View
             style={{
