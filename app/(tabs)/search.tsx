@@ -1,15 +1,18 @@
-import { PageContainer } from "@/components/container";
-import { BodyText, TitleText } from "@/components/typography";
+import { ScrollContainer } from "@/components/container";
+import FeedPost from "@/components/feed-post";
+import { TitleText } from "@/components/typography";
+import { useExploreFeed } from "@/hooks/use-feed";
 import { useTheme } from "@/providers/theme-provider";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { Keyboard, Pressable, TextInput, View } from "react-native";
 
 export default function Index() {
   const { theme } = useTheme();
+  const { data: feed } = useExploreFeed();
 
   return (
-    <Pressable onPress={Keyboard.dismiss} style={{ flex: 1 }}>
-      <PageContainer>
+    <ScrollContainer>
+      <Pressable onPress={Keyboard.dismiss} style={{ flex: 1, width: "100%" }}>
         <View
           style={{
             width: "100%",
@@ -43,9 +46,18 @@ export default function Index() {
           style={{ width: "100%", marginTop: 28, alignItems: "flex-start" }}
         >
           <TitleText bold>Popular</TitleText>
-          <BodyText>TODO: Show posts</BodyText>
+
+          <View style={{ width: "100%", marginTop: 32 }}></View>
         </View>
-      </PageContainer>
-    </Pressable>
+        {feed?.map((post) => (
+          <FeedPost
+            key={post.id}
+            poster_id={post.author_id}
+            text={post.content}
+            imagePath={post.media_url}
+          />
+        ))}
+      </Pressable>
+    </ScrollContainer>
   );
 }
